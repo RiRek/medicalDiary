@@ -23,6 +23,16 @@ public class DiaryResource {
 
     }
 
+    @GET
+    @Path("{/id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public Response getDiaryById(@PathParam("id") String id){
+        Diary diaryInput=diaries.stream().filter(object ->id.equals(object.getId().toString())).findFirst().get();
+        return Response.ok(diaryInput).build();
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

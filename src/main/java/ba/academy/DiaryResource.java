@@ -43,13 +43,18 @@ public class DiaryResource {
     }
 
     @PUT
-    @Path("{id}/{title}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateDiary(@PathParam("id") Long id, @PathParam("title") String title){
+    public Response updateDiary(@PathParam("id") String id, Diary diaryInput){
+
         diaries=diaries.stream().map(diary -> {
-            if(diary.getId().equals(id)){
-                diary.setTitle(title);
+            if(diary.getId().toString().equals(id)){
+                diary.setTitle(diaryInput.getTitle());
+                diary.setCount(diaryInput.getCount());
+                diary.setMedicines(diaryInput.getMedicines());
+                diary.setMedicineType(diaryInput.getMedicineType());
+
             }
             return diary;
         }).collect(Collectors.toList());

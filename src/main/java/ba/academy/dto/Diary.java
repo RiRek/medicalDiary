@@ -1,16 +1,51 @@
 package ba.academy.dto;
 
-import java.util.Date;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+import java.util.Date;
+@Schema(name="Diary", description = "Diary representation")
 public class Diary {
 
     private Long id;
+    @Schema(required = true )
     private Date date;
     private String title;
     private MedicineType medicineType;
     private Medicines medicines;
     private int count;
 
+    public Diary(Long id) {
+        this.id = id;
+    }
+
+    public Diary(Long id, Date date, String title, MedicineType medicineType, Medicines medicines, int count) {
+        this.id = id;
+        this.date = date;
+        this.title = title;
+        this.medicineType = medicineType;
+        this.medicines = medicines;
+        this.count = count;
+    }
+
+    public Diary(Date date, String title, MedicineType medicineType, Medicines medicines, int count) {
+        this.date = date;
+        this.title = title;
+        this.medicineType = medicineType;
+        this.medicines = medicines;
+        this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Diary{" +
+                "id=" + id +
+                ", date=" + date +
+                ", title='" + title + '\'' +
+                ", medicineType=" + medicineType +
+                ", medicines=" + medicines +
+                ", count=" + count +
+                '}';
+    }
 
     public Date getDate() {
         return date;
